@@ -56,6 +56,8 @@
 		13CD64C2092BCF8A00488C97 /* simd.h in Headers */ = {isa = PBXBuildFile; fileRef = 13CD64C0092BCF8A00488C97 /* simd.h */; settings = {ATTRIBUTES = (); }; };
 		13D0DC910931F93A00909807 /* simd_ve.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D0DC900931F93A00909807 /* simd_ve.h */; settings = {ATTRIBUTES = (); }; };
 		13D0DC970931F9D600909807 /* simd_sse.h in Headers */ = {isa = PBXBuildFile; fileRef = 13D0DC960931F9D600909807 /* simd_sse.h */; settings = {ATTRIBUTES = (); }; };
+		13DE49880E2A5D1800A1F1BF /* simd_float.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DE49870E2A5D1800A1F1BF /* simd_float.h */; };
+		13DE49890E2A5D1800A1F1BF /* simd_float.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DE49870E2A5D1800A1F1BF /* simd_float.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,7 @@
 		13CD64C0092BCF8A00488C97 /* simd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simd.h; sourceTree = "<group>"; };
 		13D0DC900931F93A00909807 /* simd_ve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simd_ve.h; sourceTree = "<group>"; };
 		13D0DC960931F9D600909807 /* simd_sse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simd_sse.h; sourceTree = "<group>"; };
+		13DE49870E2A5D1800A1F1BF /* simd_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simd_float.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libsquish.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsquish.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -182,6 +185,7 @@
 				1350D716092AA858005EE038 /* rangefit.cpp */,
 				1350D717092AA858005EE038 /* rangefit.h */,
 				13CD64C0092BCF8A00488C97 /* simd.h */,
+				13DE49870E2A5D1800A1F1BF /* simd_float.h */,
 				13D0DC960931F9D600909807 /* simd_sse.h */,
 				13D0DC900931F93A00909807 /* simd_ve.h */,
 				139C234E09B0602700A2500D /* singlecolourfit.cpp */,
@@ -236,6 +240,7 @@
 				1334279E0ACC58ED00F54FA3 /* simd_ve.h in Headers */,
 				133427A00ACC58ED00F54FA3 /* singlecolourfit.h in Headers */,
 				133427A30ACC58ED00F54FA3 /* squish.h in Headers */,
+				13DE49880E2A5D1800A1F1BF /* simd_float.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +261,7 @@
 				13A7CCA40952BE63001C963A /* colourfit.h in Headers */,
 				133FA0DC096A7B8E0050752E /* alpha.h in Headers */,
 				139C234F09B0602700A2500D /* singlecolourfit.h in Headers */,
+				13DE49890E2A5D1800A1F1BF /* simd_float.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
