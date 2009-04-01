@@ -37,6 +37,7 @@
 #include <sstream>
 #include <ctime>
 #include <cmath>
+#include <cstdlib>
 #include <squish.h>
 #include <png.h>
 
@@ -231,7 +232,9 @@ PngImage::PngImage( std::string const& fileName )
 	
 	// check the signature bytes
 	png_byte header[8];
-	fread( header, 1, 8, file.Get() );
+	size_t check = fread( header, 1, 8, file.Get() );
+	if( check != 8 )
+		throw Error( "file read error" );
 	if( png_sig_cmp( header, 0, 8 ) )
 	{
 		std::ostringstream oss;
@@ -355,11 +358,18 @@ static void Compress( std::string const& sourceFileName, std::string const& targ
 	}
 	
 	// write the header
-	fwrite( &width, sizeof( int ), 1, targetFile.Get() );
-	fwrite( &height, sizeof( int ), 1, targetFile.Get() );
+	size_t check;
+	check = fwrite( &width, sizeof( int ), 1, targetFile.Get() );
+	if( check != 1 )
+		throw Error( "file write error" );
+	check = fwrite( &height, sizeof( int ), 1, targetFile.Get() );
+	if( check != 1 )
+		throw Error( "file write error" );
 	
 	// write the data
-	fwrite( targetData.Get(), 1, targetDataSize, targetFile.Get() );
+	check = fwrite( targetData.Get(), 1, targetDataSize, targetFile.Get() );
+	if( check != ( size_t )targetDataSize )
+		throw Error( "file write error" );
 }
 
 static void Decompress( std::string const& sourceFileName, std::string const& targetFileName, int flags )
@@ -375,8 +385,13 @@ static void Decompress( std::string const& sourceFileName, std::string const& ta
 	
 	// get the width and height
 	int width, height;
-	fread( &width, sizeof( int ), 1, sourceFile.Get() ); 
-	fread( &height, sizeof( int ), 1, sourceFile.Get() );
+	size_t check;
+	check = fread( &width, sizeof( int ), 1, sourceFile.Get() ); 
+	if( check != 1 )
+		throw Error( "file read error" );	
+	check = fread( &height, sizeof( int ), 1, sourceFile.Get() );
+	if( check != 1 )
+		throw Error( "file read error" );	
 	
 	// work out the data size
 	int bytesPerBlock = ( ( flags & kDxt1 ) != 0 ) ? 8 : 16;
@@ -384,7 +399,9 @@ static void Decompress( std::string const& sourceFileName, std::string const& ta
 	Mem sourceData( sourceDataSize );
 	
 	// read the source data
-	fread( sourceData.Get(), 1, sourceDataSize, sourceFile.Get() );
+	check = fread( sourceData.Get(), 1, sourceDataSize, sourceFile.Get() );
+	if( check != ( size_t )sourceDataSize )
+		throw Error( "file read error" );
 		
 	// create the target rows
 	PngRows targetRows( width, height, 4 );
