@@ -65,6 +65,8 @@ Sym3x3 ComputeWeightedCovariance( int n, Vec3 const* points, float const* weight
 	return covariance;
 }
 
+#if 1
+
 static Vec3 GetMultiplicity1Evector( Sym3x3 const& matrix, float evalue )
 {
 	// compute M
@@ -223,5 +225,29 @@ Vec3 ComputePrincipleComponent( Sym3x3 const& matrix )
 			return GetMultiplicity1Evector( matrix, l2 );
 	}
 }
+
+#else
+
+Vec3 ComputePrincipleComponent( Sym3x3 const& matrix )
+{
+	const int NUM = 8;
+
+	Vec3 v(1, 1, 1);
+	for (int i = 0; i < NUM; i++)
+	{
+		float x = v.X() * matrix[0] + v.Y() * matrix[1] + v.Z() * matrix[2];
+		float y = v.X() * matrix[1] + v.Y() * matrix[3] + v.Z() * matrix[4];
+		float z = v.X() * matrix[2] + v.Y() * matrix[4] + v.Z() * matrix[5];
+
+		float norm = std::max(std::max(x, y), z);
+
+		float iv = 1.0f / norm;
+		v = Vec3(x*iv, y*iv, z*iv);
+	}
+
+	return v;
+}
+
+#endif
 
 } // namespace squish
