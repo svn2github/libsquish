@@ -30,6 +30,7 @@
 */
 
 #include "maths.h"
+#include "simd.h"
 #include <cfloat>
 
 namespace squish {
@@ -44,7 +45,8 @@ Sym3x3 ComputeWeightedCovariance( int n, Vec3 const* points, float const* weight
 		total += weights[i];
 		centroid += weights[i]*points[i];
 	}
-	centroid /= total;
+	if( total > FLT_EPSILON )
+		centroid /= total;
 
 	// accumulate the covariance matrix
 	Sym3x3 covariance( 0.0f );
@@ -65,7 +67,7 @@ Sym3x3 ComputeWeightedCovariance( int n, Vec3 const* points, float const* weight
 	return covariance;
 }
 
-#if 1
+#if 0
 
 static Vec3 GetMultiplicity1Evector( Sym3x3 const& matrix, float evalue )
 {
@@ -228,24 +230,28 @@ Vec3 ComputePrincipleComponent( Sym3x3 const& matrix )
 
 #else
 
+#define POWER_ITERATION_COUNT 	8
+
 Vec3 ComputePrincipleComponent( Sym3x3 const& matrix )
 {
-	const int NUM = 8;
-
-	Vec3 v(1, 1, 1);
-	for (int i = 0; i < NUM; i++)
+	Vec4 const row0( matrix[0], matrix[1], matrix[2], 0.0f );
+	Vec4 const row1( matrix[1], matrix[3], matrix[4], 0.0f );
+	Vec4 const row2( matrix[2], matrix[4], matrix[5], 0.0f );
+	Vec4 v = VEC4_CONST( 1.0f );
+	for( int i = 0; i < POWER_ITERATION_COUNT; ++i )
 	{
-		float x = v.X() * matrix[0] + v.Y() * matrix[1] + v.Z() * matrix[2];
-		float y = v.X() * matrix[1] + v.Y() * matrix[3] + v.Z() * matrix[4];
-		float z = v.X() * matrix[2] + v.Y() * matrix[4] + v.Z() * matrix[5];
+		// matrix multiply
+		Vec4 w = row0*v.SplatX();
+		w = MultiplyAdd(row1, v.SplatY(), w);
+		w = MultiplyAdd(row2, v.SplatZ(), w);
 
-		float norm = std::max(std::max(x, y), z);
+		// get max component from xyz in all channels
+		Vec4 a = Max(w.SplatX(), Max(w.SplatY(), w.SplatZ()));
 
-		float iv = 1.0f / norm;
-		v = Vec3(x*iv, y*iv, z*iv);
+		// divide through and advance
+		v = w*Reciprocal(a);
 	}
-
-	return v;
+	return v.GetVec3();
 }
 
 #endif
