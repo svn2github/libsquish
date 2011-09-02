@@ -4,11 +4,12 @@
 
 # features:
 #   Xcode: builds universal binaries, uses SSE2 on i386 and Altivec on ppc
-#   Unix and VS: SSE2 support is enabled by default, use BUILD_SQUISH_WITH_SSE2 and BUILD_SQUISH_WITH_ALTIVEC to override
+#   Unix and VS: SSE2 support is enabled by default
+#   use BUILD_SQUISH_WITH_SSE2 and BUILD_SQUISH_WITH_ALTIVEC to override
 
 PROJECT(squish)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.4)
 
 OPTION(BUILD_SQUISH_WITH_SSE2 "Build with SSE2." ON)
 OPTION(BUILD_SQUISH_WITH_ALTIVEC "Build with Altivec." OFF)
