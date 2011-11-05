@@ -6,7 +6,7 @@ include(sources.pro)
 QT -= gui
 
 CONFIG += staticlib thread
-CONFIG += debug_and_release build_all
+CONFIG += debug_and_release
 
 CONFIG(debug, debug|release) {
    unix:TARGET = $$join(TARGET,,,_debug)
