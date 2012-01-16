@@ -10,7 +10,7 @@ CONFIG += debug_and_release
 
 CONFIG(debug, debug|release) {
    unix:TARGET = $$join(TARGET,,,_debug)
-   win32:TARGET = $$join(TARGET,,d)
+   win32:TARGET = $$join(TARGET,,,d)
 }
 
 MOC_DIR = mocs
@@ -23,8 +23,8 @@ CONFIG(debug, debug|release) {
    unix:OBJECTS_DIR = $$join(OBJECTS_DIR,,,_debug)
    unix:RCC_DIR = $$join(RCC_DIR,,,_debug)
    unix:UI_DIR = $$join(UI_DIR,,,_debug)
-   win32:MOC_DIR = $$join(MOC_DIR,,d)
-   win32:OBJECTS_DIR = $$join(OBJECTS_DIR,,d)
-   win32:RCC_DIR = $$join(RCC_DIR,,d)
-   win32:UI_DIR = $$join(UI_DIR,,d)
+   win32:MOC_DIR = $$join(MOC_DIR,,,d)
+   win32:OBJECTS_DIR = $$join(OBJECTS_DIR,,,d)
+   win32:RCC_DIR = $$join(RCC_DIR,,,d)
+   win32:UI_DIR = $$join(UI_DIR,,,d)
 }
