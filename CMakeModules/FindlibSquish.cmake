@@ -3,8 +3,8 @@
 #  LIBSQUISH_INCLUDE_DIR
 #  LIBSQUISH_LIBRARIES
 
-FIND_PATH(LIBSQUISH_INCLUDE_DIR squish.h PATHS . .. DOC "Directory containing libSquish headers")
-FIND_LIBRARY(LIBSQUISH_LIBRARY NAMES squish libsquish PATHS . .. DOC "Path to libSquish library")
+FIND_PATH(LIBSQUISH_INCLUDE_DIR squish.h PATHS . .. squish ../squish DOC "Directory containing libSquish headers")
+FIND_LIBRARY(LIBSQUISH_LIBRARY NAMES squish libsquish PATHS . .. squish ../squish DOC "Path to libSquish library")
 
 SET(LIBSQUISH_LIBRARIES ${LIBSQUISH_LIBRARY})
 
