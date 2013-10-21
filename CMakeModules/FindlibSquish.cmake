@@ -4,7 +4,7 @@
 #  LIBSQUISH_LIBRARIES
 
 FIND_PATH(LIBSQUISH_INCLUDE_DIR squish.h PATHS . squish .. ../squish DOC "Directory containing libSquish headers")
-FIND_LIBRARY(LIBSQUISH_LIBRARY NAMES squish libsquish PATHS . squish .. ../squish PATH_SUFFIXES lib release minsizerel relwithdebinfo DOC "Path to libSquish library")
+FIND_LIBRARY(LIBSQUISH_LIBRARY NAMES squish libsquish PATHS . squish .. ../squish PATH_SUFFIXES lib lib64 release minsizerel relwithdebinfo DOC "Path to libSquish library")
 
 SET(LIBSQUISH_LIBRARIES ${LIBSQUISH_LIBRARY})
 
