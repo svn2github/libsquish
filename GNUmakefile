@@ -10,13 +10,6 @@ HDR += config.h simd.h simd_float.h simd_sse.h simd_ve.h singlecolourlookup.inl
 
 OBJ = $(SRC:%.cpp=%.o)
 
-ifeq ($(HOSTTYPE),intel-pc) # intel-pc = macos x 10.5
-   USE_SHARED = 0
-endif
-ifeq ($(HOSTTYPE),intel-mac) # intel-mac = macos x 10.6+
-   USE_SHARED = 0
-endif
-
 ifeq ($(USE_SHARED),1)
    SOLIB = libsquish.so.$(SOVER)
    LIB = $(SOLIB).0
