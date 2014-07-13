@@ -37,7 +37,7 @@ else
 endif
 
 tgz: clean
-	tar zcf libsquish-$(VER).tgz $(SRC) $(HDR) GNUmakefile config CMakeLists.txt libsquish.pro README ChangeLog Doxyfile
+	tar zcf libsquish-$(VER).tgz $(SRC) $(HDR) GNUmakefile config CMakeLists.txt libsquish.pro sources.pro README ChangeLog Doxyfile
 
 %.o: %.cpp
 	$(CXX) $(CPPFLAGS) -I. $(CXXFLAGS) -o $@ -c $<
