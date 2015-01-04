@@ -1,7 +1,7 @@
 TARGET = squish
 TEMPLATE = lib
 
-include(sources.pri)
+include(libSquish.pri)
 
 QT -= gui
 
